@@ -18,6 +18,24 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
+            'category_name' => 'ANALGESIK NARKOTIK',
+            'description' => ''
+          
+        ]);
+
+        DB::table('categories')->insert([
+            'category_name' => 'ANESTETIK LOKAL',
+            'description' => ''
+          
+        ]);
+
+        DB::table('categories')->insert([
+            'category_name' => 'ANTIALERGI dan OBAT untuk ANAFILAKSIS',
+            'description' => ''
+          
+        ]);
+
+        DB::table('categories')->insert([
             'category_name' => 'ANTIDOT dan OBAT LAIN untuk KERACUNAN',
             'description' => ''
           
