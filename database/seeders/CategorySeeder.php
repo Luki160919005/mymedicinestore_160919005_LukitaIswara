@@ -35,6 +35,10 @@ class CategorySeeder extends Seeder
           
         ]);
 
+
+
+
+
         DB::table('categories')->insert([
             'category_name' => 'ANTIDOT dan OBAT LAIN untuk KERACUNAN',
             'description' => ''
