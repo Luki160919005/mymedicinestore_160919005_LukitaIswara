@@ -26,6 +26,8 @@ class CategoryController extends Controller
         return view('category.index',compact('listdata'));
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *

@@ -32,6 +32,13 @@ Route::resource('category',CategoryController::class);
 //Route::resource('Cate','CategoryController');
 Route::get('/join', '\App\Http\Controllers\MedicineController@joinTable');
 
+Route::get('/checkImages', '\App\Http\Controllers\MedicineController@checkImages');
+
+Route::get('/check', '\App\Http\Controllers\MedicineController@test');
+
 Route::get('/aggro', '\App\Http\Controllers\MedicineController@aggregation');
 //Route::resource('cate', '\App\Http\Controllers\CategoryController@index');
 //Route::resource('cate', [CategoryController::class, 'index']);
+Route::get('/test', '\App\Http\Controllers\MedicineController@test');
+
+Route::get('report/lustmedicine/{id}','\App\Http\Controllers\CategoryController@aggregation');

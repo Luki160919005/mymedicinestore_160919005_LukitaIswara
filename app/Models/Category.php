@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+    public function medicines()
+    {
+        return $this->belongsTo('App\Category','category_id');
+    }
+
 }

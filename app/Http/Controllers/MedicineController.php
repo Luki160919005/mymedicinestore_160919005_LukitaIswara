@@ -7,6 +7,7 @@ use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class MedicineController extends Controller
 {
     /**
@@ -16,15 +17,23 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        $listdata = DB::select(DB::raw('select * from medicines'));
+        //$listdata = DB::select(DB::raw('select * from medicines'));
 
         //dd($listdata);
 
         $listdata = DB::table('medicines')->get();
 
-        $listdata= Medicine::all();
+        //$listdata= Medicine::all();
 
         return view('medicine.index',compact('listdata'));
+    }
+
+    public function test(){
+        $result=DB::table('medicines')
+            ->where('price','>',20000)
+            ->get();
+        dd($result);
+        
     }
 
     public function joinTable(){
@@ -37,37 +46,69 @@ class MedicineController extends Controller
         
     }
 
+    public function checkImages(){
+        //$data = DB::select(DB::raw('select * from medicines'));
+
+        //dd($listdata);
+
+        $data = DB::table('medicines')->get();
+
+        //$data= Medicine::all();
+
+        return view('check.show',compact('data'));
+    }
+
+    
+
     public function aggregation(){
         
         $listdataNo1 = DB::select(DB::raw('SELECT count(*) as FilteredActs FROM (SELECT c.id FROM medicines m
         INNER JOIN categories c ON m.category_id = c.id GROUP BY c.id) T;'));
-
-        print_r(count($listdataNo1));
-        $listdataNo2 = DB::select(DB::raw('SELECT c.category_name as catname FROM medicines m
+     
+        /*$listdataNo2 = DB::select(DB::raw('SELECT c.category_name as catname FROM medicines m
         RIGHT JOIN categories c ON m.category_id = c.id
-        WHERE m.category_id IS NULL'));
-
-    
+        WHERE m.category_id IS NULL'));*/
+        
+        $listdataNo2=DB::table("medicines")
+            ->rightJoin("categories", function($join){
+                $join->on("category_id", "=", "categories.id");
+            })
+            ->select("categories.category_name as catname")
+            ->whereNull("category_id")
+            ->get();
 
         $listdataNo3 = DB::select(DB::raw('SELECT c.category_name as categoryName,  IF(IsNull(AVG(price)), "0", AVG(price))as averagePrice FROM medicines m
         RIGHT JOIN categories c ON m.category_id = c.id
         GROUP BY c.category_name;'));
 
-   
+        /*
+        $listdataNo3=DB::table("medicines")
+        ->rightJoin("categories", function($join){
+            $join->on("medicines.category_id", "=", "c.id");
+        })
+        ->select("categories.category_name as categoryname", "if (isnull(avg(price))", "'0'", "avg (price))as averageprice")
+        ->groupBy("categories.category_name")
+        ->get();*/
         
         $listdataNo4 = DB::select(DB::raw('SELECT c.category_name AS categoryName,count(m.generic_name) AS numberOFMedicines FROM medicines m
         INNER JOIN categories c ON m.category_id = c.id 
         GROUP BY c.category_name
         HAVING count(m.generic_name) = 1'));
-   
-        
 
-        
+  
+              
 
         $listdataNo5 = DB::select(DB::raw('SELECT * FROM `medicines` WHERE form IS NOT NULL ORDER BY `id` ASC '));
 
         
         $listdataNo6 = DB::select(DB::raw('SELECT c.category_name AS categoryName, MAX(m.generic_name),MAX(m.price) AS maxPrice FROM medicines m INNER JOIN categories c ON m.category_id = c.id GROUP BY c.category_name, m.category_id;'));
+
+        
+        /*$listdataNo6 = DB::table("medicines")
+        ->join("categories","medicines.category_id", "=", "categories.id")
+        ->select("categories.category_name as categoryname", "generic_name", "max(`medicines.price`) as maxprice")
+        ->groupBy("categories.category_name")
+        ->get();*/
 
         return view('aggregation.index',compact('listdataNo1','listdataNo2','listdataNo3','listdataNo4'
         ,'listdataNo5','listdataNo6'));
