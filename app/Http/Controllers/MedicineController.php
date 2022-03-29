@@ -28,6 +28,19 @@ class MedicineController extends Controller
         return view('medicine.index',compact('listdata'));
     }
 
+    public function CheckMed()
+    {
+        //$listdata = DB::select(DB::raw('select * from medicines'));
+
+        //dd($listdata);
+
+        $data = DB::table('medicines')->get();
+
+        //$listdata= Medicine::all();
+
+        return view('check.show',compact('data'));
+    }
+
     public function test(){
         $result=DB::table('medicines')
             ->where('price','>',20000)
@@ -144,7 +157,7 @@ class MedicineController extends Controller
      */
     public function show(Medicine $medicine)
     {
-        //
+        return view("medicine.show",["data"=>$medicine]);
     }
 
     /**

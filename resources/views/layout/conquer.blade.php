@@ -40,6 +40,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+@yield('javascript')
+
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -157,7 +160,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				</a>
             </li>
             <li class="start ">
-				<a href="{{url('/medic')}}">
+				<a href="{{url('/medicines')}}">
 				<i class="fa fa-paper-plane-o"></i>
 				<span class="title">Medicine</span>
 				</a>

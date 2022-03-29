@@ -27,8 +27,6 @@
         <td>{{$d->restriction_formula}}</td>
     </tr>
     
-     <tr>
-        <td>Category</td>
         
      <tr>
         <td>Description</td>

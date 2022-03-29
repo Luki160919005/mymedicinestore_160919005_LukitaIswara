@@ -27,12 +27,16 @@ Route::get('/', function () {
 
 //Route::resource('product','ProductResController');
 
-Route::resource('medic',MedicineController::class);
+Route::resource('medicines',MedicineController::class);
 Route::resource('category',CategoryController::class);
 //Route::resource('Cate','CategoryController');
 Route::get('/join', '\App\Http\Controllers\MedicineController@joinTable');
 
+Route::get('/checkMed', '\App\Http\Controllers\MedicineController@CheckMed');
+
 Route::get('/checkImages', '\App\Http\Controllers\MedicineController@checkImages');
+
+Route::get('/show/{$medicine}', '\App\Http\Controllers\MedicineController@show');
 
 Route::get('/check', '\App\Http\Controllers\MedicineController@test');
 
