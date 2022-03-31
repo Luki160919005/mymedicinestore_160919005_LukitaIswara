@@ -41,6 +41,9 @@
             <td>{{$li->generic_name}}</td>
             <td>{{$li->form}}</td>
             <td>{{$li->restriction_formula}}</td>
+    
+            <td>{{$li->category->category_name}}</td>
+     
       
             
             <td>

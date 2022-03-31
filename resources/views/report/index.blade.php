@@ -22,14 +22,6 @@
             <td>{{$li->description}}</td>
             <td>{{$li->created_at}}</td>
             <td>{{$li->updated_at}}</td>
-            <td>
-            
-            <ul>
-                @foreach($li->getMedicines as $lim)
-                  <li>{{$lim->generic_name}}</li>
-                @endforeach
-              </ul>
-            </td>
         </tr>
         @endforeach
       

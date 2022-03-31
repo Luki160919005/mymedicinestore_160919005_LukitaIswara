@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Category;
 use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,11 +21,26 @@ class MedicineController extends Controller
 
         //dd($listdata);
 
-        $listdata = DB::table('medicines')->get();
+        //$listdata = DB::table('medicines')->get();
 
         //$listdata= Medicine::all();
 
+        $md = new Medicine();
+        $listdata = $md->getalldata();
+
+
         return view('medicine.index',compact('listdata'));
+    }
+
+    public function showInfo()
+    {
+        $result=Medicine::orderBy('price','desc')->first();
+        return response()->json(array('status'=>'oke','msg'=>"
+        <div class='alert alert-danger'>
+            Did you know? 
+            <br>
+            Harga obat termahal adalah ".$result->generic_name . " ".$result->form ." dengan harga " . $result->price)
+            ,200);
     }
 
     public function CheckMed()

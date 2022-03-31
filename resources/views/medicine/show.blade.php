@@ -35,6 +35,7 @@
                 <td>Description</td>
                 <td>{{$data->description}}</td>
             </tr>
+           
             <tr>
                 <td>Photo</td>
                 <td>

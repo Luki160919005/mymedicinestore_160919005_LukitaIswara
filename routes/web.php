@@ -27,6 +27,8 @@ Route::get('/', function () {
 
 //Route::resource('product','ProductResController');
 
+Route::post('/medicines/showInfo','\App\Http\Controllers\MedicineController@showInfo')->name('medicines.showInfo');
+
 Route::resource('medicines',MedicineController::class);
 Route::resource('category',CategoryController::class);
 //Route::resource('Cate','CategoryController');
@@ -45,4 +47,4 @@ Route::get('/aggro', '\App\Http\Controllers\MedicineController@aggregation');
 //Route::resource('cate', [CategoryController::class, 'index']);
 Route::get('/test', '\App\Http\Controllers\MedicineController@test');
 
-Route::get('report/lustmedicine/{id}','\App\Http\Controllers\CategoryController@aggregation');
+Route::get('report/listmedicine/{id}','\App\Http\Controllers\CategoryController@showlist');
