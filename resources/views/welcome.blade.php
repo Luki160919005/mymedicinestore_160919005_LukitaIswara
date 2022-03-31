@@ -17,7 +17,11 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             
-     
+            <li >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" onclick="showInfo()">
+                <i class="icon-bulb"></a></i>
+            </li>
 
         </ul>
         <div class="page-toolbar">
@@ -49,7 +53,9 @@
         </div>
 
         <div class="content">
-     
+            <div id='div_showinfo'>
+
+            </div>
             <div class="title m-b-md">
                 APOTIKZ
             </div>
@@ -78,6 +84,16 @@
 
 @section('javascript')
 <script>
-
+function showInfo()
+{
+  $.ajax({
+    type:'POST',
+    url:'{{route("medicines.showInfo")}}',
+    data:'_token=<?php echo csrf_token() ?>',
+    success: function(data){
+       $('#div_showinfo').html(data.msg)
+    }
+  });
+}
 </script>
 @endsection

@@ -15,21 +15,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        /*
         $listdata = DB::select(DB::raw('select * from categories'));
 
         //dd($listdata);
         
         $listdata = DB::table('categories')->get();
 
-        $listdata= Category::all();*/
-        $ct = new Category();
-        $listdata = $ct->getalldata();
-
+        $listdata= Category::all();
 
         return view('category.index',compact('listdata'));
-
-       
     }
 
     public function showlist($id_category){

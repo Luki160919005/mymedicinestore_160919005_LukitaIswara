@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+
 use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,13 +21,9 @@ class MedicineController extends Controller
 
         //dd($listdata);
 
-        //$listdata = DB::table('medicines')->get();
+        $listdata = DB::table('medicines')->get();
 
         //$listdata= Medicine::all();
-
-        $md = new Medicine();
-        $listdata = $md->getalldata();
-
 
         return view('medicine.index',compact('listdata'));
     }

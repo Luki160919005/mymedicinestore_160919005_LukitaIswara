@@ -23,9 +23,8 @@
             <td>{{$li->created_at}}</td>
             <td>{{$li->updated_at}}</td>
             <td>
-            
             <ul>
-                @foreach($li->getMedicines as $lim)
+                @foreach($li->medicines as $lim)
                   <li>{{$lim->generic_name}}</li>
                 @endforeach
               </ul>
