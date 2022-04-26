@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,6 +32,7 @@ Route::post('/medicines/showInfo','\App\Http\Controllers\MedicineController@show
 
 Route::resource('medicines',MedicineController::class);
 Route::resource('category',CategoryController::class);
+Route::resource('transaction',TransactionController::class);
 //Route::resource('Cate','CategoryController');
 Route::get('/join', '\App\Http\Controllers\MedicineController@joinTable');
 
@@ -48,3 +50,4 @@ Route::get('/aggro', '\App\Http\Controllers\MedicineController@aggregation');
 Route::get('/test', '\App\Http\Controllers\MedicineController@test');
 
 Route::get('report/listmedicine/{id}','\App\Http\Controllers\CategoryController@showlist');
+
