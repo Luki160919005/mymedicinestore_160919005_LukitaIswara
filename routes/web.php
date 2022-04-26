@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,5 +50,9 @@ Route::get('/aggro', '\App\Http\Controllers\MedicineController@aggregation');
 //Route::resource('cate', [CategoryController::class, 'index']);
 Route::get('/test', '\App\Http\Controllers\MedicineController@test');
 
-Route::get('report/listmedicine/{id}','\App\Http\Controllers\CategoryController@showlist');
+Route::get('transaction/showDataAjax','\App\Http\Controllers\TransactionController@showAjax'
+)->name('transaction.showAjax');
+Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionController@showAjax')
+    ->name('transaction.showAjax2');
 
+Route::resource('suppliers',SupplierController::class);
