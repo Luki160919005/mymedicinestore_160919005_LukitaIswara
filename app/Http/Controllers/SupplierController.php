@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -15,7 +16,7 @@ class SupplierController extends Controller
     public function index()
     {
         $result = Supplier::all();
-        return view("supplier.create",["data"=>$result]);
+        return view("supplier.index",["data"=>$result]);
     }
 
     /**
@@ -25,7 +26,8 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view("supplier.create");
+        $categories = Category::all();
+        return view("supplier.create", compact('categories'));
     }
 
     /**
@@ -36,7 +38,12 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Supplier();
+        $data->name=$request->get('name');
+        $data->address=$request->get('address');
+        $data->save();
+
+        return redirect()->route('suppliers.index')->with('status','Data Supplier Baru berhasil tersimpan');
     }
 
     /**

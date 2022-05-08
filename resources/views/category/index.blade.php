@@ -18,12 +18,12 @@
         @foreach($listdata as $li)
         <tr>
             <td>{{$li->	id}}</td>
-            <td>{{$li->category_name}}</td>
+            <td>{{$li->name}}</td>
             <td>{{$li->description}}</td>
             <td>{{$li->created_at}}</td>
             <td>{{$li->updated_at}}</td>
             <td>
-            <ul>
+              <ul>
                 @foreach($li->medicines as $lim)
                   <li>{{$lim->generic_name}}</li>
                 @endforeach
@@ -31,7 +31,6 @@
             </td>
         </tr>
         @endforeach
-      
     </tbody>
   </table>
 </div>

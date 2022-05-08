@@ -17,13 +17,12 @@
     @foreach($data as $d)
       <tr>
         <td>{{$d->id}}</td>
-        <td>{{$d->buyers->name}}</td>
+        <td>{{($d->buyer->name)}}</td>
         <td>{{$d->user->name}}</td>
         <td>{{$d->transaction_date}}</td>
         <td>
-           <a class='btn btn-default' data-toggle='modal' href="#basic" 
-           onclick="getDetailData2({{$d->id}});"
-           >Detail</a>
+           <a class='btn btn-default' data-toggle='modal' href="#basic" onclick="getDetailData2({{$d->id}});">
+           Detail</a>
         </td>
         
       </tr>
@@ -53,6 +52,7 @@
 
 @section('javascript')
 <script>
+    
     function getDetailData(id) {
     $.ajax({
         type:'POST',

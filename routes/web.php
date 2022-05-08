@@ -56,3 +56,4 @@ Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionCo
     ->name('transaction.showAjax2');
 
 Route::resource('suppliers',SupplierController::class);
+

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaction;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
@@ -13,12 +14,14 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-        //$result=Transaction::all();
-        $result = DB::table('transactions')->get();
+        $result=Transaction::all();
+  
         //dd($result);
-        return view("transaction.index",["data"=>$result]);
+        return view("Transaction.index",["data"=>$result]);
     }
 
     /**
