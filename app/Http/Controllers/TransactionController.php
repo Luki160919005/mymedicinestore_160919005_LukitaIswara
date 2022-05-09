@@ -92,19 +92,23 @@ class TransactionController extends Controller
 
     public function showAjax(Request $request)
     {
-        $id=$request->id;
         
+        $id=$request->id;
         return response()->json(array(
             'msg'=>$id
         ),200);
+
+    
     }
 
     public function showAjax2($id)
     {
+       
         $data=Transaction::find($id);
         $medicines=$data->medicines;
         return response()->json(array(
             'msg'=>view('transaction.showdetail',compact('data','medicines'))->render()
         ),200);
+  
     }
 }

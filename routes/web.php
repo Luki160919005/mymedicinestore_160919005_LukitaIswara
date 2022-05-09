@@ -50,10 +50,11 @@ Route::get('/aggro', '\App\Http\Controllers\MedicineController@aggregation');
 //Route::resource('cate', [CategoryController::class, 'index']);
 Route::get('/test', '\App\Http\Controllers\MedicineController@test');
 
-Route::get('transaction/showDataAjax','\App\Http\Controllers\TransactionController@showAjax'
-)->name('transaction.showAjax');
-Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionController@showAjax')
+Route::post('transaction/showDataAjax','\App\Http\Controllers\TransactionController@showAjax')->name('transaction.showAjax');
+Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionController@showAjax2')
     ->name('transaction.showAjax2');
+
+   
 
 Route::resource('suppliers',SupplierController::class);
 
