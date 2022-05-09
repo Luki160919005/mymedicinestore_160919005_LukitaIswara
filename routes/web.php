@@ -55,6 +55,8 @@ Route::post('transaction/showDataAjax','\App\Http\Controllers\TransactionControl
 Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionController@showAjax2')
     ->name('transaction.showAjax2');
 
+Route::get('/showDataAjax3/{id}','\App\Http\Controllers\TransactionController@showAjax3')->name('transaction.showAjax3');;
+ 
    
 
 Route::resource('suppliers',SupplierController::class);

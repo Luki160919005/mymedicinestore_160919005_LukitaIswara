@@ -26,16 +26,9 @@
         </td>
      
         <td>
-          <a class='btn btn-info' href='transaction/showDataAjax2")}}/({{$d->id}})'
-            data-target="#showdetail{{$d->id}}" data-toggle='modal'>detail</a>        
-          <div class="modal fade" id="showdetail{{$d->id}}" tabindex="-1" role="basic" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-              <img src="{{ asset('assets/img/ajax-modal-loading.gif')}}" alt="" class="loading">
-              <!-- put animated gif here -->
-            </div>
-            </div>
-          </div>
+          <a class='btn btn-default' data-toggle='modal' href="{{route('transaction.showAjax3',$d->id)}}" >
+            Detail2</a>
+  
         </td>
         
       </tr>

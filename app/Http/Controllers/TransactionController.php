@@ -111,4 +111,12 @@ class TransactionController extends Controller
         ),200);
   
     }
+    public function showAjax3($id)
+    {
+       
+        $data=Transaction::find($id);
+        $medicines=$data->medicines;
+        return view("transaction.showdetail2", compact('medicines'));
+  
+    }
 }
