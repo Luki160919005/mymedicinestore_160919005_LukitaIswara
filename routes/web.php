@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -57,4 +58,5 @@ Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionCo
    
 
 Route::resource('suppliers',SupplierController::class);
+Route::resource('products',ProductController::class);
 
