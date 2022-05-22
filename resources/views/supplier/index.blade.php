@@ -28,8 +28,14 @@
             <td>{{$d->name}}</td>
             <td>{{$d->address}}</td>
             <td>
-              <a class="btn btn-warning">Edit</a>
-              <a class="btn btn-danger">Delete</a>
+              <a href="{{url ('suppliers/'.$d->id.'/edit')}}" class="btn btn-warning">Edit</a>
+
+              <form  method="POST" action="{{url('suppliers/'.$d->id)}}">
+                @csrf;
+                @method("DELETE")
+                <input type="submit" value="Delete" class="btn btn-danger"
+                onclick="if(!confirm('Are you sure you want to delete {{$d->name}} ?')) return false;" />
+              </form>
            
             </td>
             

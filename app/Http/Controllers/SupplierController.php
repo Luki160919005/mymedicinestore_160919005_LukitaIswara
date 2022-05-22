@@ -65,7 +65,8 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        $data=$supplier;
+        return view('supplier.edit', compact('data'));
     }
 
     /**
@@ -78,6 +79,12 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         //
+        $supplier->name = $request->get('name');
+        $supplier->address = $request->get('address');
+        $supplier->save();
+        return redirect()->route('suppliers.index')->with('status','Data berhasil diubah');
+
+
     }
 
     /**
@@ -89,5 +96,8 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         //
+        $supplier->delete();
+        return redirect()->route('suppliers.index')->with('status','Succeed to delete');
+
     }
 }
