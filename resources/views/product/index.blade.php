@@ -31,9 +31,16 @@
             <td>{{$d->product_price}}</td>
             <td>{{$d->created_at}}</td>
             <td>{{$d->updated_at}}</td>
+            <td>{{$d->category_id}}</td>
             <td>
-              <a class="btn btn-warning">Edit</a>
-              <a class="btn btn-danger">Delete</a>
+              <a href="{{url ('products/'.$d->id.'/edit')}}" class="btn btn-warning">Edit</a>
+
+              <form  method="POST" action="{{url('products/'.$d->id)}}">
+                @csrf;
+                @method("DELETE")
+                <input type="submit" value="Delete" class="btn btn-danger"
+                onclick="if(!confirm('Are you sure you want to delete {{$d->name}} ?')) return false;" />
+              </form>
            
             </td>
             
