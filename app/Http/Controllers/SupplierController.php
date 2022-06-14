@@ -46,6 +46,39 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.index')->with('status','Data Supplier Baru berhasil tersimpan');
     }
 
+    public function getEditForm(Request $request){
+        $id = $request->get('id');
+        $data=Supplier::find($id);
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>view('supplier.getEditForm', compact('data'))->render()
+        ),200);
+        
+    }
+
+    public function getEditForm2(Request $request){
+        $id = $request->get('id');
+        $data=Supplier::find($id);
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>view('supplier.getEditForm2', compact('data'))->render()
+        ),200);
+        
+    }
+
+    public function saveData(Request $request){
+        $id = $request->get('id');
+        $Supplier = Supplier::find($id);
+        $Supplier->name= $request->get('name');
+        $Supplier->address= $request->get('address');
+        $Supplier->save();
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>'Supplier data updated'
+        ),200);
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -99,5 +132,23 @@ class SupplierController extends Controller
         $supplier->delete();
         return redirect()->route('suppliers.index')->with('status','Succeed to delete');
 
+    }
+
+    public function deleteData(Request $request){
+        try{
+            $id = $request->get('id');
+            $Supplier = Supplier::find($id);
+            $Supplier->delete();
+            return response()->json(array(
+                'status'=>'ok',
+                'msg'=>'Supplier data deleted'
+            ),200);
+            
+        }catch(\PDOException $e){
+            return response()->json(array(
+                'status'=>'error',
+                'msg'=>'Supplier is not deleted. It may used in the product.'
+            ),200);
+        }
     }
 }
