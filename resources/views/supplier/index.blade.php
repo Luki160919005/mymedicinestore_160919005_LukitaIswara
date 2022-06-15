@@ -100,6 +100,7 @@
            
             </td>
             <td>
+              @can('delete-permission')
               <form  method="POST" action="{{url('suppliers/'.$d->id)}}">
                   @csrf;
                   @method("DELETE")
@@ -115,6 +116,7 @@
                     }
                   }" />
                 </form>
+                @endcan
                 
                 <a class="btn btn-xs btn-danger"
                 onclick="if('Are you really sure?')

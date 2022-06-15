@@ -34,13 +34,14 @@
             <td>{{$d->category_id}}</td>
             <td>
               <a href="{{url ('products/'.$d->id.'/edit')}}" class="btn btn-warning">Edit</a>
-
+              @can('delete-permission')
               <form  method="POST" action="{{url('products/'.$d->id)}}">
                 @csrf;
                 @method("DELETE")
                 <input type="submit" value="Delete" class="btn btn-danger"
                 onclick="if(!confirm('Are you sure you want to delete {{$d->name}} ?')) return false;" />
               </form>
+              @endcan
            
             </td>
             

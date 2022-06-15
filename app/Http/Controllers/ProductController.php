@@ -51,10 +51,18 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = Category::all();
-        $suppliers = Supplier::all();
-        $data=$product;
-        return view('product.edit', compact('data','categories','suppliers'));
+        $this->authorize('delete-permission',$product);
+        try{
+            $categories = Category::all();
+            $suppliers = Supplier::all();
+            $data=$product;
+            return view('product.edit', compact('data','categories','suppliers'));
+        }catch(\PDOException $e){
+            return response()->json(array(
+                'status'=>'error',
+                'msg'=>'Supplier is not deleted. It may used in the product.'
+            ),200);
+        }
     }
 
     /**
@@ -67,11 +75,19 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
-        $product->product_name = $request->get('product_name');
-        $product->product_price = $request->get('product_price');
-        $product->category_id = $request->get('category_id');
-        $product->save();
-        return redirect()->route('products.index')->with('status','Data berhasil diubah');
+        $this->authorize('delete-permission',$product);
+        try{
+            $product->product_name = $request->get('product_name');
+            $product->product_price = $request->get('product_price');
+            $product->category_id = $request->get('category_id');
+            $product->save();
+            return redirect()->route('products.index')->with('status','Data berhasil diubah');
+        }catch(\PDOException $e){
+            return response()->json(array(
+                'status'=>'error',
+                'msg'=>'Supplier is not deleted. It may used in the product.'
+            ),200);
+        }
 
 
     }
@@ -85,9 +101,17 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
-        $product->delete();
-        $result = Product::all();
-        return view("product.index",["data"=>$result])->with('status','Succeed to delete');
+        $this->authorize('delete-permission',$product);
+        try{
+            $product->delete();
+            $result = Product::all();
+            return view("product.index",["data"=>$result])->with('status','Succeed to delete');
+        }catch(\PDOException $e){
+            return response()->json(array(
+                'status'=>'error',
+                'msg'=>'Supplier is not deleted. It may used in the product.'
+            ),200);
+        }
    
         //return redirect()->route('products.index')->with('status','Succeed to delete');
 

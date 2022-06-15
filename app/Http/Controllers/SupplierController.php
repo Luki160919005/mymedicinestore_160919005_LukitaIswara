@@ -129,9 +129,17 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         //
-        $supplier->delete();
-        return redirect()->route('suppliers.index')->with('status','Succeed to delete');
+        $this->authorize('delete-permission',$supplier);
 
+        try{
+            $supplier->delete();
+            return redirect()->route('suppliers.index')->with('status','Succeed to delete');
+        }catch(\PDOException $e){
+            return response()->json(array(
+                'status'=>'error',
+                'msg'=>'Supplier is not deleted. It may used in the product.'
+            ),200);
+        }
     }
 
     public function deleteData(Request $request){
