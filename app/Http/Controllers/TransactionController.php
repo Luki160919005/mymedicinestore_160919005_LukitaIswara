@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class TransactionController extends Controller
 {
@@ -14,6 +16,40 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function insertProduct($cart, $user){
+        $total=0;
+        foreach($cart as $id => $detail){
+            $total += $detail['price']*$detail['quantity'];
+            $this->products()->attach($id,['quantity' => $detail['quantity'], 'subtotal' => $detail['price']]);
+
+        }
+        return $total;
+
+    }
+
+     public function submit_front(){
+        $this->authorize('checkmember');
+
+        $cart = session()->get('cart');
+        $user = Auth::user();
+        $t = new Transaction;
+        $t->buyer_id = 1;
+        $t->user_id = $user->id;
+      
+        $t->transaction_date = Carbon::now()->toDateTimeString();
+        $t->save();
+
+        $totalPrice = $t->insertProduct($cart, $user);
+        $t->total = $totalPrice;
+        $t->save();
+
+        session()->forget('cart');
+        return redirect('home');
+
+     }
+    
+    
 
 
     public function index()
@@ -101,6 +137,13 @@ class TransactionController extends Controller
     
     }
 
+    public function form_submit_front()
+    {
+        $this->authorize('checkmember');
+        return view('frontend.checkout');
+    }
+  
+
     public function showAjax2($id)
     {
        
@@ -119,4 +162,5 @@ class TransactionController extends Controller
         return view("transaction.showdetail2", compact('medicines'));
   
     }
+
 }

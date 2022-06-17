@@ -20,12 +20,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-Auth::routes();
-Route::get('/home','HomeController@index')->name('home');
+Route::get('/checkout','\App\Http\Controllers\TransactionController@form_submit_front')->middleware('auth');
+Route::get('/submit_checkout','\App\Http\Controllers\TransactionController@submit_front')
+->name('submitcheckout')->middleware('auth');
+
+
+Route::get('/','\App\Http\Controllers\ProductController@front_index');
+Route::get('cart','\App\Http\Controllers\ProductController@cart');
+Route::get('add-to-cart/{id}','\App\Http\Controllers\ProductController@addToCart');
+
+
+Route::get('/home','\App\Http\Controllers\HomeController@index')->name('home');
 
 //Route::get('formnewproduct','ProductController@create');
 
