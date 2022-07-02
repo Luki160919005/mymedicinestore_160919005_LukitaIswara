@@ -34,6 +34,7 @@ Route::get('/submit_checkout','\App\Http\Controllers\TransactionController@submi
 Route::get('/','\App\Http\Controllers\ProductController@front_index');
 Route::get('cart','\App\Http\Controllers\ProductController@cart');
 Route::get('add-to-cart/{id}','\App\Http\Controllers\ProductController@addToCart');
+Route::get('transactionDetail/{id}','\App\Http\Controllers\ProductController@transactionDetail');
 
 
 Route::get('/home','\App\Http\Controllers\HomeController@index')->name('home');

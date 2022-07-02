@@ -157,7 +157,45 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Medicine();
+        $data->name=$request->get('name');
+        $data->address=$request->get('address');
+        $data->save();
+
+        return redirect()->route('medicine.index')->with('status','Data Supplier Baru berhasil tersimpan');
+    }
+
+    public function getEditForm(Request $request){
+        $id = $request->get('id');
+        $data=Medicine::find($id);
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>view('supplier.getEditForm', compact('data'))->render()
+        ),200);
+        
+    }
+
+    public function getEditForm2(Request $request){
+        $id = $request->get('id');
+        $data=Medicine::find($id);
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>view('supplier.getEditForm2', compact('data'))->render()
+        ),200);
+        
+    }
+
+    public function saveData(Request $request){
+        $id = $request->get('id');
+        $Supplier = Medicine::find($id);
+        $Supplier->name= $request->get('name');
+        $Supplier->address= $request->get('address');
+        $Supplier->save();
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>'Medicine data updated'
+        ),200);
+        
     }
 
     /**

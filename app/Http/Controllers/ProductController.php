@@ -17,7 +17,9 @@ class ProductController extends Controller
         return view("frontend.product",compact('products'));
     }
 
-
+    public function cart(){
+        return view('frontend.cart');
+    }
     public function addToCart($id){
         $p = Product::find($id);
         $cart=session()->get('cart');

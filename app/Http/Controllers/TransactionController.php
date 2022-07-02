@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
+
 class TransactionController extends Controller
 {
     /**
@@ -27,9 +28,10 @@ class TransactionController extends Controller
         return $total;
 
     }
+    
 
      public function submit_front(){
-        $this->authorize('checkmember');
+        $this->authorize('customer');
 
         $cart = session()->get('cart');
         $user = Auth::user();
