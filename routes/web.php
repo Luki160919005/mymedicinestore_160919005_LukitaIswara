@@ -74,10 +74,56 @@ Route::get('transaction/showDataAjax2/{id}','\App\Http\Controllers\TransactionCo
 
 Route::get('/showDataAjax3/{id}','\App\Http\Controllers\TransactionController@showAjax3')->name('transaction.showAjax3');;
  
-   
+
+Route::middleware(['auth'])->group(function(){
+
+    Route::post('/category/getEditForm','\App\Http\Controllers\CategoriesController@getEditForm')
+    ->name('category.getEditForm');
+
+    Route::post('/category/getEditForm2','\App\Http\Controllers\CategoriesController@getEditForm2')
+    ->name('category.getEditForm2');
+
+    Route::post('/category/saveData','\App\Http\Controllers\CategoriesController@saveData')
+    ->name('category.saveData');
+
+    Route::get('/category/{id}/edit','\App\Http\Controllers\CategoriesController@categoriesCreate')
+    ->name('category.edit');
 
 
-Route::resource('products',ProductController::class);
+
+
+    Route::get('categoriesCreate','\App\Http\Controllers\CategoriesController@categoriesCreate');
+
+    Route::get('/categoriesEdit/{id}','\App\Http\Controllers\CategoriesController@editCategories');
+
+    Route::post('/category/deleteData','\App\Http\Controllers\CategoriesController@deleteData')
+    ->name('category.deleteData');
+});
+
+
+
+
+Route::middleware(['auth'])->group(function(){
+
+    Route::resource('products',ProductController::class);
+    Route::post('/products/getEditForm','\App\Http\Controllers\ProductController@getEditForm')
+    ->name('products.getEditForm');
+
+    Route::post('/products/getEditForm2','\App\Http\Controllers\ProductController@getEditForm2')
+    ->name('products.getEditForm2');
+
+    Route::post('/products/saveData','\App\Http\Controllers\ProductController@saveData')
+    ->name('products.saveData');
+
+    Route::post('/products/deleteData','\App\Http\Controllers\ProductController@deleteData')
+    ->name('products.deleteData');
+
+    Route::post('/products/saveDataField','\App\Http\Controllers\ProductController@saveDataField')
+    ->name('products.saveDataField');
+
+    Route::post('/products/ChangeLogo','\App\Http\Controllers\ProductController@changeLogo')
+    ->name('products.changeLogo');
+});
 
 
 Route::middleware(['auth'])->group(function(){
@@ -94,15 +140,14 @@ Route::middleware(['auth'])->group(function(){
 
     Route::post('/supplier/deleteData','\App\Http\Controllers\SupplierController@deleteData')
     ->name('supplier.deleteData');
+
+    Route::post('/supplier/saveDataField','\App\Http\Controllers\SupplierController@saveDataField')
+    ->name('supplier.saveDataField');
+
+    Route::post('/supplier/ChangeLogo','\App\Http\Controllers\SupplierController@changeLogo')
+    ->name('suppliers.changeLogo');
 });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

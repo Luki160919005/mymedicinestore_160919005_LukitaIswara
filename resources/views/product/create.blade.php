@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="portlet-body form">
-            <form role="form" method="POST" action="{{url('products')}}">
+            <form role="form" method="POST" action="{{url('products')}}" enctype="multipart/form-data">
                 @csrf;
                 <div class="form-body">
                     <div class="form-group">
@@ -30,6 +30,10 @@
                         <input name="product_price" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter text">
                         <span class="help-block">
                         product_price</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <input name="logo" type="file" class="form-control" id="logo" placeholder="Enter text">
                     </div>
           
            

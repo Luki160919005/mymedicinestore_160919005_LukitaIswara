@@ -30,6 +30,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="{{ asset('assets/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('assets/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css"/>
+<script src="{{ asset('assets/plugins/jquery.editable.min.js')}}" type="text/javascript"></script>
+
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="{{ asset('assets/css/style-conquer.css')}}" rel="stylesheet" type="text/css"/>
@@ -174,15 +176,15 @@ License: You must have a valid license purchased only from themeforest(the above
 				</a>
             </li>
             <li class="start ">
-				<a href="{{url('/aggro')}}">
+				<a href="{{url('/suppliers')}}">
 				<i class="fa fa-tree"></i>
-				<span class="title">Obat Termahal(in no 6) with list of other reports</span>
+				<span class="title">Suppliers</span>
 				</a>
             </li>
             <li class="start ">
-				<a href="{{url('/checkImages')}}">
+				<a href="{{url('/products')}}">
 				<i class="fa fa-arrows"></i>
-				<span class="title">Check Images</span>
+				<span class="title">Products</span>
 				</a>
             </li>
         
@@ -225,6 +227,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('assets/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('assets/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('assets/plugins/uniform/jquery.editable.min.js')}}" type="text/javascript"></script>
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{ asset('assets/scripts/app.js')}}"></script>
@@ -233,9 +237,11 @@ License: You must have a valid license purchased only from themeforest(the above
 jQuery(document).ready(function() {       
    // initiate layout and plugins
    App.init();
+   Index.init();
 });
 </script>
+@yield('initialscript')
 <!-- END JAVASCRIPTS -->
 </body>
-<!-- END BODY -->
+<!-- END BODY -->   
 </html>

@@ -66,13 +66,33 @@ class ProductController extends Controller
         $data->product_name=$request->get('product_name');
         $data->product_price=$request->get('product_price');
 
-        $data->created_at=$now->format('Y-m-d H:i:s'); 
-        $data->updated_at=$now->format('Y-m-d H:i:s'); 
+        $file=$request->file('logo');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $data->logo=$imgFile;
+
+        $data->image="";
+        $data->created_at=strval($now->format('Y-m-d H:i:s')); 
+        $data->updated_at=strval($now->format('Y-m-d H:i:s')); 
         $data->category_id=$request->get('category_id');
      
         $data->save();
 
         return redirect()->route('products.index')->with('status','Data product Baru berhasil tersimpan');
+    }
+
+    public function changeLogo(Request $request){
+        $id = $request->get('id');
+        $file = $request->file('logo');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+        $product=Product::find($id);
+        $product->logo=$imgFile;
+        $product->save();
+        return redirect()->route('products.index')->with('status','product logo is changed');
+        
     }
 
 

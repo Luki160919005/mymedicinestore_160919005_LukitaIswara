@@ -17,7 +17,7 @@
     @foreach($data as $d)
       <tr>
         <td>{{$d->id}}</td>
-        <td>{{($d->buyer->name)}}</td>
+
         <td>{{$d->user->name}}</td>
         <td>{{$d->transaction_date}}</td>
         <td>

@@ -39,11 +39,32 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $data = new Supplier();
+
+        $file=$request->file('logo');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $data->logo=$imgFile;
+        
+        
         $data->name=$request->get('name');
         $data->address=$request->get('address');
         $data->save();
 
         return redirect()->route('suppliers.index')->with('status','Data Supplier Baru berhasil tersimpan');
+    }
+
+    public function changeLogo(Request $request){
+        $id = $request->get('id');
+        $file = $request->file('logo');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+        $Supplier=Supplier::find($id);
+        $Supplier->logo=$imgFile;
+        $Supplier->save();
+        return redirect()->route('suppliers.index')->with('status','Supplier logo is changed');
+
     }
 
     public function getEditForm(Request $request){
@@ -100,6 +121,23 @@ class SupplierController extends Controller
     {
         $data=$supplier;
         return view('supplier.edit', compact('data'));
+    }
+
+    public function saveDataField(Request $request)
+    {
+        $id = $request->get('id');
+        $fname = $request->get('fname');
+        $value = $request->get('value');
+
+        $Supplier=Supplier::find($id);
+        $Supplier->$fname=$value;
+        $Supplier->save();
+        return response()->jason(array(
+            'status'=>'ok',
+            'msg'=>'supplier data updated'
+
+        ),200);
+
     }
 
     /**

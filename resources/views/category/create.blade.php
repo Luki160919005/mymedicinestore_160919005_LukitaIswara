@@ -1,12 +1,12 @@
-@extends('layout.conquer')
+@extends('layout.star')
 
 @section('content')
 <div class="container">
-    <h2>List of Suppliers</h2>
+    <h2>List of Categories</h2>
     <div class="portlet">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-reorder"></i> Tambah Data Supplier
+                <i class="fa fa-reorder"></i> Add Categories
             </div>
             <div class="tools">
                 <a href="" class="collapse"></a>
@@ -16,34 +16,21 @@
             </div>
         </div>
         <div class="portlet-body form">
-            <form role="form" method="POST" action="{{url('suppliers')}}"
-            enctype='multipart/form-data'>
+            <form role="form" method="POST" action="{{url('category')}}">
                 @csrf;
                 <div class="form-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Supplier</label>
+                        <label for="exampleInputEmail1">Categories</label>
                         <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter text">
                         <span class="help-block">
-                        Isikan Nama supplier </span>
+                        Categories Name </span>
                     </div>
             
                     <div class="form-group">
-                        <label>Alamat</label>
-                        <textarea name="address" class="form-control" rows="5"></textarea>
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" rows="5"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Logo</label>
-                        <input name="logo" type="file" class="form-control" id="logo" placeholder="Enter text">
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select name='category'>
-                            @foreach($categories as  $c)
-                            <option value="{{$c->id}}">{{$c->name}}</option>
-                            @endforeach
-                        </select>
-                        
-                    </div>
+                   
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-info">Submit</button>
